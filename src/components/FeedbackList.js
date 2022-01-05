@@ -1,18 +1,21 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { useContext } from "react"
 import FeedbackContext from "../context/feedback_context"
+import Loading from './Loading'
 
 import FeedbackItem from "./FeedbackItem"
 
 function FeedbackList() {
 
-    const {feedback} = useContext(FeedbackContext)
+    const {feedback,loading} = useContext(FeedbackContext)
 
-    if (!feedback || feedback.length === 0) {
+    if (!loading && (!feedback || feedback.length === 0)) {
         return <p>No feedback yet</p>
     }
+
+    return loading ? <Loading/> : 
    
-    return (
+     (
         <div className="feedback-list">
             <AnimatePresence>
 
